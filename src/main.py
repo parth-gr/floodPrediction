@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 from sklearn.neural_network import MLPRegressor
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
 import pickle
 import wandb
 
@@ -12,7 +14,7 @@ def retrieve_and_clean_data():
     X = data_df.iloc[:, 1:21].to_numpy()
     y = data_df["FloodProbability"].values
 
-    return X, y
+    return train_test_split(X, y, random_state=1)
 
 
 def predict_flood_prob(request):
@@ -23,15 +25,30 @@ def predict_flood_prob(request):
     return mdl.predict(np.reshape(request, (1, -1)))
 
 
+def print_metrics(X, y, mdl):
+    y_pred = mdl.predict(X)
+
+    MAE = metrics.mean_absolute_error(y, y_pred)
+    print("Mean absolute error = {}".format(MAE))
+
+    MSE = metrics.mean_squared_error(y, y_pred)
+    print("Mean squared error = {}".format(MSE))
+
+    RMSE = metrics.root_mean_squared_error(y, y_pred)
+    print("Root mean squared error = {}".format(RMSE))
+
+    R2 = metrics.r2_score(y, y_pred)
+    print("R\u00b2 score = {}".format(R2))
+
+
 if __name__ == '__main__':
     # start a new wandb run to track this script
     wandb.init(project="flood-detection")
       
-    X, y = retrieve_and_clean_data()
-    wandb.log({"data_size": len(X), "feature_count": X.shape[1]})
+    X_train, X_test, y_train, y_test = retrieve_and_clean_data()
 
     # Create model and save
-    model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X, y)
+    model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
     print("Model trained successful!")
     
     train_score = model.score(X, y)  # R^2 score
@@ -40,6 +57,9 @@ if __name__ == '__main__':
     with open('model.pkl', 'wb') as f:
         pickle.dump(model, f)
     print("Model saved to disk!")
+    
     wandb.save("model.pkl")
     
     wandb.finish()
+
+    print_metrics(X_test, y_test, model)
