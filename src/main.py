@@ -5,7 +5,7 @@ import pickle
 
 
 def retrieve_and_clean_data():
-    filename = "train.csv"
+    filename = "data/train.csv"
     data_df = pd.read_csv(filename)
     # data_df["WillFloodingOccur"] = np.where(data_df["FloodProbability"] < 0.5, 0, 1)
 
