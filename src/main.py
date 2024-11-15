@@ -5,6 +5,8 @@ from sklearn.model_selection import train_test_split
 from sklearn import metrics
 import pickle
 import wandb
+from sklearn.metrics import mean_squared_error, r2_score
+
 
 def retrieve_and_clean_data():
     filename = "../data/train.csv"
@@ -14,7 +16,7 @@ def retrieve_and_clean_data():
     X = data_df.iloc[:, 1:21].to_numpy()
     y = data_df["FloodProbability"].values
 
-    return train_test_split(X, y, random_state=1)
+    return X, y
 
 
 def predict_flood_prob(request):
@@ -45,11 +47,38 @@ if __name__ == '__main__':
     # start a new wandb run to track this script
     wandb.init(project="flood-detection")
       
-    X_train, X_test, y_train, y_test = retrieve_and_clean_data()
+    X, y = retrieve_and_clean_data()
+    wandb.log({"data_summary": wandb.Table(data=X[:10], columns=[f"Feature_{i}" for i in range(X.shape[1])])})
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
+    print("Data split into training and testing sets.")
+    wandb.log({"training_samples": len(X_train), "testing_samples": len(X_test)})
 
     # Create model and save
     model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
     print("Model trained successful!")
+    
+    train_predictions = model.predict(X_train)
+    train_mse = mean_squared_error(y_train, train_predictions)
+    train_r2 = r2_score(y_train, train_predictions)
+    wandb.log({"train_mse": train_mse, "train_r2": train_r2})
+    print(f"Training MSE: {train_mse}, R2: {train_r2}")
+
+    print("Evaluating model...")
+    test_predictions = model.predict(X_test)
+    test_mse = mean_squared_error(y_test, test_predictions)
+    test_r2 = r2_score(y_test, test_predictions)
+    wandb.log({"test_mse": test_mse, "test_r2": test_r2})
+    print(f"Testing MSE: {test_mse}, R2: {test_r2}")
+    
+    table = wandb.Table(data=list(zip(y_test, test_predictions)), columns=["True Values", "Predicted Values"])
+
+    # Log the scatter plot
+    wandb.log({
+        "prediction_scatter": wandb.plot.scatter(
+            table, "True Values", "Predicted Values", title="True vs Predicted Values"
+        )
+    })
     
     train_score = model.score(X, y)  # R^2 score
     wandb.log({"train_score": train_score})
