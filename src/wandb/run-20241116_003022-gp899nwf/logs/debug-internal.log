@@ -1,0 +1,16 @@
+{"time":"2024-11-16T00:30:22.17508061+05:30","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-16T00:30:22.175091991+05:30","level":"INFO","msg":"created symlink","path":"/home/rider/project-floodPrediction/floodPrediction/src/wandb/run-20241116_003022-gp899nwf/logs/debug-core.log"}
+{"time":"2024-11-16T00:30:22.277281833+05:30","level":"INFO","msg":"created new stream","id":"gp899nwf"}
+{"time":"2024-11-16T00:30:22.27730454+05:30","level":"INFO","msg":"stream: started","id":"gp899nwf"}
+{"time":"2024-11-16T00:30:22.277354659+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:22.277355413+05:30","level":"INFO","msg":"sender: started","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:22.27739835+05:30","level":"INFO","msg":"handler: started","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:23.043287695+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-16T00:30:23.310414784+05:30","level":"INFO","msg":"stream: closing","id":"gp899nwf"}
+{"time":"2024-11-16T00:30:23.31045982+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-16T00:30:23.311021708+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-16T00:30:29.051715964+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-16T00:30:29.543641716+05:30","level":"INFO","msg":"handler: closed","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:29.543761181+05:30","level":"INFO","msg":"sender: closed","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:29.543734405+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"gp899nwf"}
+{"time":"2024-11-16T00:30:29.543907729+05:30","level":"INFO","msg":"stream: closed","id":"gp899nwf"}

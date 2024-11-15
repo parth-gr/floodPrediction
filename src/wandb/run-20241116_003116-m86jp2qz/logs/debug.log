@@ -1,0 +1,32 @@
+2024-11-16 00:31:16,664 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Current SDK version is 0.18.7
+2024-11-16 00:31:16,664 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Configure stats pid to 697528
+2024-11-16 00:31:16,664 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Loading settings from /home/rider/.config/wandb/settings
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Loading settings from /home/rider/project-floodPrediction/floodPrediction/src/wandb/settings
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Loading settings from environment variables: {}
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Applying setup settings: {'mode': None, '_disable_service': None}
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Inferring run settings from compute environment: {'program_relpath': 'src/main.py', 'program_abspath': '/home/rider/project-floodPrediction/floodPrediction/src/main.py', 'program': '/home/rider/project-floodPrediction/floodPrediction/src/main.py'}
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_setup.py:_flush():79] Applying login settings: {}
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:_log_setup():533] Logging user logs to /home/rider/project-floodPrediction/floodPrediction/src/wandb/run-20241116_003116-m86jp2qz/logs/debug.log
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:_log_setup():534] Logging internal logs to /home/rider/project-floodPrediction/floodPrediction/src/wandb/run-20241116_003116-m86jp2qz/logs/debug-internal.log
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:init():619] calling init triggers
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:init():626] wandb.init called with sweep_config: {}
+config: {}
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:init():669] starting backend
+2024-11-16 00:31:16,665 INFO    MainThread:697528 [wandb_init.py:init():673] sending inform_init request
+2024-11-16 00:31:16,666 INFO    MainThread:697528 [backend.py:_multiprocessing_setup():104] multiprocessing start_methods=fork,spawn,forkserver, using: spawn
+2024-11-16 00:31:16,667 INFO    MainThread:697528 [wandb_init.py:init():686] backend started and connected
+2024-11-16 00:31:16,669 INFO    MainThread:697528 [wandb_init.py:init():781] updated telemetry
+2024-11-16 00:31:16,680 INFO    MainThread:697528 [wandb_init.py:init():814] communicating run to backend with 90.0 second timeout
+2024-11-16 00:31:18,284 INFO    MainThread:697528 [wandb_init.py:init():867] starting run threads in backend
+2024-11-16 00:31:18,508 INFO    MainThread:697528 [wandb_run.py:_console_start():2456] atexit reg
+2024-11-16 00:31:18,508 INFO    MainThread:697528 [wandb_run.py:_redirect():2305] redirect: wrap_raw
+2024-11-16 00:31:18,508 INFO    MainThread:697528 [wandb_run.py:_redirect():2370] Wrapping output streams.
+2024-11-16 00:31:18,508 INFO    MainThread:697528 [wandb_run.py:_redirect():2395] Redirects installed.
+2024-11-16 00:31:18,510 INFO    MainThread:697528 [wandb_init.py:init():911] run started, returning control to user process
+2024-11-16 00:31:55,879 INFO    MainThread:697528 [wandb_run.py:_finish():2155] finishing run partharora1010-indian-institute-of-science/flood-detection/m86jp2qz
+2024-11-16 00:31:55,880 INFO    MainThread:697528 [wandb_run.py:_atexit_cleanup():2420] got exitcode: 0
+2024-11-16 00:31:55,880 INFO    MainThread:697528 [wandb_run.py:_restore():2402] restore
+2024-11-16 00:31:55,880 INFO    MainThread:697528 [wandb_run.py:_restore():2408] restore done
+2024-11-16 00:32:04,574 INFO    MainThread:697528 [wandb_run.py:_footer_history_summary_info():3960] rendering history
+2024-11-16 00:32:04,575 INFO    MainThread:697528 [wandb_run.py:_footer_history_summary_info():3992] rendering summary
+2024-11-16 00:32:04,582 INFO    MainThread:697528 [wandb_run.py:_footer_sync_info():3921] logging synced files
