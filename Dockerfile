@@ -7,8 +7,6 @@ WORKDIR /app
 # Copy the local files to the container
 COPY . /app
 
-COPY data /app/data
-
 # Install required system dependencies (if any)
 RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
