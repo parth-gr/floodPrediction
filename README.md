@@ -1,6 +1,6 @@
 # Flood Prediction Using Multi-layer Perceptron Regression Model
 ## Introduction
-
+Flood is one of the most common natural disasters in India. Global climate change and extreme weather conditions cause floods globally. In earlier days, Statistical methods and historical data were the most common methods to predict floods. In the present day, machine learning—a powerful tool that is transforming flood forecasting with enhanced accuracy and predictive capabilities. Artificial Neural Networks (ANNs), Support Vector Machines (SVMs), Random Forests, Long Short-Term Memory (LSTM) Networks are the most popular machine learning techniques to predict floods. 
 
 ## ML Model
 Multi-layer Perceptron (MLP) is a supervised learning algorithm that learns a function  𝑓:𝑅^𝑚→𝑅^0 by training on a dataset, where m is the number of dimensions for input, and 0 is the number of dimensions for output.
