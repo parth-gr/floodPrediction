@@ -13,7 +13,10 @@ The noise or residual error is well-mannered (normal or Gaussian distribution).
 Let’s say there is a numerical response variable, Y, and one or more predictor variables, $X_1, X_2,$ etc. Let’s say, hypothetically speaking, the following represents the relationship between Y and X in the real world.
   
    $Y_i = f(X) + error$
-If $Y_i$  is the ith observed value and $\cap{Y_1}$  is the ith predicted value, then the ith residual or error value is calculated as the following:
+   
+If $Y_i$  is the ith observed value and $\bar{Y_1}$  is the ith predicted value, then the ith residual or error value is calculated as the following:
+
+$e_1=Y_1- \bar{Y_i}$
 
 
 
