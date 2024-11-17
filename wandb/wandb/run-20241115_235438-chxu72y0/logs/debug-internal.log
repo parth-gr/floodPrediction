@@ -1,0 +1,17 @@
+{"time":"2024-11-15T23:54:38.835555+05:30","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2024-11-15T23:54:38.835577236+05:30","level":"INFO","msg":"created symlink","path":"/home/rider/project-floodPrediction/floodPrediction/wandb/wandb/run-20241115_235438-chxu72y0/logs/debug-core.log"}
+{"time":"2024-11-15T23:54:38.940764771+05:30","level":"INFO","msg":"created new stream","id":"chxu72y0"}
+{"time":"2024-11-15T23:54:38.9408656+05:30","level":"INFO","msg":"stream: started","id":"chxu72y0"}
+{"time":"2024-11-15T23:54:38.940971051+05:30","level":"INFO","msg":"sender: started","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:38.940969509+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:38.941072755+05:30","level":"INFO","msg":"handler: started","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:39.572698434+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2024-11-15T23:54:39.79449248+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2024-11-15T23:54:39.79477966+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2024-11-15T23:54:40.795639413+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading wandb-metadata.json","runtime_seconds":0.870034799,"progress":"840B/840B"},{"desc":"uploading requirements.txt","runtime_seconds":0.580036624,"progress":"5.5KB/5.5KB"},{"desc":"uploading history, summary","runtime_seconds":0.257923716},{"desc":"updating run config","runtime_seconds":0.256886494}],"total_operations":4}}
+{"time":"2024-11-15T23:54:45.810953262+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2024-11-15T23:54:47.403067215+05:30","level":"INFO","msg":"stream: closing","id":"chxu72y0"}
+{"time":"2024-11-15T23:54:47.403185361+05:30","level":"INFO","msg":"handler: closed","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:47.403235556+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:47.403294358+05:30","level":"INFO","msg":"sender: closed","stream_id":"chxu72y0"}
+{"time":"2024-11-15T23:54:47.403406825+05:30","level":"INFO","msg":"stream: closed","id":"chxu72y0"}

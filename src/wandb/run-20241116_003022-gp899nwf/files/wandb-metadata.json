@@ -1,0 +1,32 @@
+{
+  "os": "Linux-5.14.18-100.fc33.x86_64-x86_64-with-glibc2.32",
+  "python": "3.9.9",
+  "startedAt": "2024-11-15T19:00:22.174336Z",
+  "program": "/home/rider/project-floodPrediction/floodPrediction/src/main.py",
+  "codePath": "src/main.py",
+  "git": {
+    "remote": "https://github.com/parth-gr/floodPrediction.git",
+    "commit": "cacc8e62142d9967f46f429fbf70513c89eb2de6"
+  },
+  "email": "partharora1010@gmail.com",
+  "root": "/home/rider/project-floodPrediction/floodPrediction/src",
+  "host": "fedora",
+  "username": "rider",
+  "executable": "/usr/bin/python3",
+  "codePathLocal": "main.py",
+  "cpu_count": 4,
+  "cpu_count_logical": 8,
+  "disk": {
+    "/": {
+      "total": "254339448832",
+      "used": "164198699008"
+    }
+  },
+  "memory": {
+    "total": "33425391616"
+  },
+  "cpu": {
+    "count": 4,
+    "countLogical": 8
+  }
+}
