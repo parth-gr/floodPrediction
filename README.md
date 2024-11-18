@@ -17,6 +17,7 @@ Let’s say there is a numerical response variable, Y, and one or more predictor
 If $Y_i$  is the ith observed value and $\bar{Y_1}$  is the ith predicted value, then the ith residual or error value is calculated as the following:
 
 $e_1=Y_1- \bar{Y_i}$
+this is the 
 
 
 
