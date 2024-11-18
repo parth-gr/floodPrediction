@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 def retrieve_and_clean_data():
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
-    data_df = pd.read_csv("../data/train.csv")
+    data_df = pd.read_csv("data/train.csv")
     # data_df["WillFloodingOccur"] = np.where(data_df["FloodProbability"] < 0.5, 0, 1)
 
     X = data_df.iloc[:, 1:21].to_numpy()
