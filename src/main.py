@@ -12,7 +12,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 def retrieve_and_clean_data():
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
-    data_df = pd.read_csv("data/train.csv")
+    data_df = pd.read_csv("../data/train.csv")
     # data_df["WillFloodingOccur"] = np.where(data_df["FloodProbability"] < 0.5, 0, 1)
 
     X = data_df.iloc[:, 1:21].to_numpy()
@@ -45,6 +45,22 @@ def print_metrics(X, y, mdl):
     print("R\u00b2 score = {}".format(R2))
 
 
+def train_and_save_metrics(X_train, X_test, y_train, y_test, mdl):
+    test_mse_list = []
+    test_r2_list = []
+    n = X_train.shape[0]
+
+    batch_size = 10000
+
+    for i in range(0, n, batch_size):
+        mdl.partial_fit(X_train[i : i + batch_size, :], y_train[i : i + batch_size])
+        y_pred = mdl.predict(X_test)
+        test_mse_list.append(mean_squared_error(y_test, y_pred))
+        test_r2_list.append(r2_score(y_test, y_pred))
+
+    return test_mse_list, test_r2_list
+
+
 if __name__ == '__main__':
     # start a new wandb run to track this script
     wandb.init(project="flood-detection")
@@ -56,9 +72,29 @@ if __name__ == '__main__':
     print("Data split into training and testing sets.")
     wandb.log({"training_samples": len(X_train), "testing_samples": len(X_test)})
 
-    # Create model and save
-    model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
+    # Create model
+    model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,))
+
+    # Train model and capture metrics
+    test_mse_list, test_r2_list = train_and_save_metrics(X_train, X_test, y_train, y_test, model)
+
     print("Model trained successful!")
+
+    # Plot MSE during training
+    test_mse_table = wandb.Table(data=list(zip(range(len(test_mse_list)), test_mse_list)), columns=["Epoch", "MSE"])
+    wandb.log({
+        "MSE_during_training": wandb.plot.line(
+            test_mse_table, "Epoch", "MSE", title="MSE during training"
+        )
+    })
+
+    # Plot R2 during training
+    test_r2_table = wandb.Table(data=list(zip(range(len(test_r2_list)), test_r2_list)), columns=["Epoch", "R2"])
+    wandb.log({
+        "R2_during_training": wandb.plot.line(
+            test_r2_table, "Epoch", "R2", title="R\u00b2 during training"
+        )
+    })
     
     train_predictions = model.predict(X_train)
     train_mse = mean_squared_error(y_train, train_predictions)
