@@ -46,5 +46,8 @@ jobs:
       run: docker build -t flood-prediction:latest .
 
     # Run the Docker container
-    - name: Run Docker Container
-      run: docker run --rm -e WANDB_API_KEY=${{ secrets.WANDB_API_KEY }} flood-prediction:latest
+    - name: Run Docker Container for non linear regression MLPRegressor
+      run: docker run --rm -e WANDB_API_KEY=${{ secrets.WANDB_API_KEY }} flood-prediction:latest main1
+
+    - name: Run Docker Container for linear regression
+      run: docker run --rm -e WANDB_API_KEY=${{ secrets.WANDB_API_KEY }} flood-prediction:latest main2
