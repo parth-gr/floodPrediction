@@ -27,20 +27,39 @@ def predict_flood_prob(request):
     return mdl.predict(np.reshape(request, (1, -1)))
 
 
-def print_metrics(X, y, mdl):
-    y_pred = mdl.predict(X)
+def calculate_metrics(X_train, X_test, y_train, y_test, mdl):
+    metrics_dict = {}
+    y_pred_train = mdl.predict(X_train)
+    y_pred_test = mdl.predict(X_test)
+    metrics_dict["y_pred_test"] = y_pred_test
 
-    MAE = metrics.mean_absolute_error(y, y_pred)
-    print("Mean absolute error = {}".format(MAE))
+    metrics_dict["MAE"] = metrics.mean_absolute_error(y_test, y_pred_test)
+    print("Mean absolute error = {}".format(metrics_dict["MAE"]))
 
-    MSE = metrics.mean_squared_error(y, y_pred)
-    print("Mean squared error = {}".format(MSE))
+    metrics_dict["Training MSE"] = metrics.mean_squared_error(y_train, y_pred_train)
+    print("Training mean squared error = {}".format(metrics_dict["Training MSE"]))
 
-    RMSE = metrics.root_mean_squared_error(y, y_pred)
-    print("Root mean squared error = {}".format(RMSE))
+    metrics_dict["Test MSE"] = metrics.mean_squared_error(y_test, y_pred_test)
+    print("Test mean squared error = {}".format(metrics_dict["Test MSE"]))
 
-    R2 = metrics.r2_score(y, y_pred)
-    print("R\u00b2 score = {}".format(R2))
+    metrics_dict["RMSE"] = metrics.root_mean_squared_error(y_test, y_pred_test)
+    print("Root mean squared error = {}".format(metrics_dict["RMSE"]))
+
+    metrics_dict["Training R2"] = metrics.r2_score(y_train, y_pred_train)
+    print("Training R\u00b2 score = {}".format(metrics_dict["Training R2"]))
+
+    metrics_dict["Test R2"] = metrics.r2_score(y_test, y_pred_test)
+    print("Test R\u00b2 score = {}".format(metrics_dict["Test R2"]))
+
+    metrics_dict["EVS"] = metrics.explained_variance_score(y_test, y_pred_test)
+    print("Explained variance score = {}".format(metrics_dict["EVS"]))
+
+    metrics_dict["ME"] = metrics.max_error(y_test, y_pred_test)
+    print("Max error = {}".format(metrics_dict["ME"]))
+
+    metrics_dict["residuals"] = y_test - y_pred_test
+
+    return metrics_dict
 
 
 if __name__ == '__main__':
@@ -57,32 +76,43 @@ if __name__ == '__main__':
     # Create model and save
     model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
     print("Model trained successful!")
-    
-    train_predictions = model.predict(X_train)
-    train_mse = mean_squared_error(y_train, train_predictions)
-    train_r2 = r2_score(y_train, train_predictions)
-    wandb.log({"train_mse": train_mse, "train_r2": train_r2})
-    print(f"Training MSE: {train_mse}, R2: {train_r2}")
 
     print("Evaluating model...")
-    test_predictions = model.predict(X_test)
-    test_mse = mean_squared_error(y_test, test_predictions)
-    test_r2 = r2_score(y_test, test_predictions)
-    wandb.log({"test_mse": test_mse, "test_r2": test_r2})
-    print(f"Testing MSE: {test_mse}, R2: {test_r2}")
-    
-    table = wandb.Table(data=list(zip(y_test, test_predictions)), columns=["True Values", "Predicted Values"])
+    metrics_dict = calculate_metrics(X_train, X_test, y_train, y_test, model)
+
+    # Plot loss
+    training_loss_list = model.loss_curve_
+    training_loss_table = wandb.Table(data=list(zip(range(len(training_loss_list)), training_loss_list)), columns=["Epoch", "Loss"])
+    wandb.log({
+        "Loss during training": wandb.plot.line(
+            training_loss_table, "Epoch", "Loss", title="Training loss during training"
+        )
+    })
+
+    wandb.log({"train_mse": metrics_dict["Training MSE"], "train_r2": metrics_dict["Training R2"]})
+    wandb.log({"test_mse": metrics_dict["Test MSE"], "test_r2": metrics_dict["Test R2"]})
+    wandb.log({"mae": metrics_dict["MAE"]})
+    wandb.log({"rmse": metrics_dict["RMSE"]})
+    wandb.log({"explained_variance_score": metrics_dict["EVS"]})
+    wandb.log({"Max error": metrics_dict["ME"]})
+
 
     # Log the scatter plot
+    table = wandb.Table(data=list(zip(y_test, metrics_dict["y_pred_test"])), columns=["True Values", "Predicted Values"])
     wandb.log({
         "prediction_scatter": wandb.plot.scatter(
             table, "True Values", "Predicted Values", title="True vs Predicted Values"
         )
     })
-    
-    train_score = model.score(X, y)  # R^2 score
-    wandb.log({"train_score": train_score})
-    
+
+    # Log residuals
+    residuals_table = wandb.Table(data=list(zip(metrics_dict["y_pred_test"], metrics_dict["residuals"])), columns=["Predicted Values", "Residuals"])
+    wandb.log({
+        "residuals_scatter": wandb.plot.scatter(
+            residuals_table, "Predicted Values", "Residuals", title="Predicted Values vs Residuals"
+        )
+    })
+
     with open('model.pkl', 'wb') as f:
         pickle.dump(model, f)
     print("Model saved to disk!")
@@ -91,4 +121,4 @@ if __name__ == '__main__':
     
     wandb.finish()
 
-    print_metrics(X_test, y_test, model)
+
