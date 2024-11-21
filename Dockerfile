@@ -12,6 +12,7 @@ RUN mkdir -p /app/src/main1 /app/src/main2
 
 # Copy the main files to their respective directories
 COPY src/main.py /app/src/main1/
+COPY src/HyperParameterTuning.py /app/src/main1/
 COPY data/train.csv /app/src/main1/
 COPY src/mainlr.py /app/src/main2/
 COPY data/train.csv /app/src/main2/
