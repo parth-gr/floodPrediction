@@ -57,7 +57,7 @@ if __name__ == '__main__':
     # Create model and save
     model = MLPRegressor( random_state=1, hidden_layer_sizes=params['hidden_layer_sizes'],
                          learning_rate=params['learning_rate'],
-                         max_iter=params['max_iter'], solver=params['solver'] )
+                         max_iter=params['max_iter'], solver=params['solver'] ).fit(X_train, y_train)
 
     # model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
     print("Model trained successful!")
