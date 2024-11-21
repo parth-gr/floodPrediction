@@ -1,0 +1,6 @@
+activation,relu
+alpha,0.0001
+hidden_layer_sizes,"(20, 30, 50)"
+learning_rate,invscaling
+max_iter,100
+solver,adam

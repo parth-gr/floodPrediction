@@ -7,13 +7,11 @@ import pickle
 import wandb
 import os
 from sklearn.metrics import mean_squared_error, r2_score
+from HyperParameterTuning import read_hyper_parameters
 
 
 def retrieve_and_clean_data():
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-
-    # data_df["WillFloodingOccur"] = np.where(data_df["FloodProbability"] < 0.5, 0, 1)
-
+    data_df = pd.read_csv("data/train.csv")
     X = data_df.iloc[:, 1:21].to_numpy()
     y = data_df["FloodProbability"].values
 
@@ -51,12 +49,17 @@ if __name__ == '__main__':
     X, y = retrieve_and_clean_data()
     wandb.log({"data_summary": wandb.Table(data=X[:10], columns=[f"Feature_{i}" for i in range(X.shape[1])])})
 
+    params = read_hyper_parameters()
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=1)
     print("Data split into training and testing sets.")
     wandb.log({"training_samples": len(X_train), "testing_samples": len(X_test)})
 
     # Create model and save
-    model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
+    model = MLPRegressor( random_state=1, hidden_layer_sizes=params['hidden_layer_sizes'],
+                         learning_rate=params['learning_rate'],
+                         max_iter=params['max_iter'], solver=params['solver'] )
+
+    # model = MLPRegressor(random_state=1, hidden_layer_sizes=(25,)).fit(X_train, y_train)
     print("Model trained successful!")
     
     train_predictions = model.predict(X_train)
