@@ -52,5 +52,3 @@ def read_hyper_parameters():
                 else:
                     params[rows[0]] = rows[1]
     return params
-
-print("Run this file")
