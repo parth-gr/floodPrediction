@@ -43,7 +43,6 @@ def read_hyper_parameters():
         reader = csv.reader(csv_file)
         for rows in reader:
             if len(rows):
-                print(type(rows[1]))
                 if rows[0] == 'hidden_layer_sizes':
                     params[rows[0]] = eval(rows[1])
                 elif rows[0] == 'max_iter':
