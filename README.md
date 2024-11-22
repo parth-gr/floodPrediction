@@ -35,8 +35,9 @@ $e_1=Y_1- \bar{Y_i}$
 MLPRegressor uses parameter alpha for regularization (L2 regularization) term which helps in avoiding overfitting by penalizing weights with large magnitudes. 
 
 MLP trains using Stochastic Gradient Descent, Adam, or L-BFGS. Stochastic Gradient Descent (SGD) updates parameters using the gradient of the loss function with respect to a parameter that needs adaptation, i.e.
-$w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}
-+ \frac{\partial Loss}{\partial w})$
+
+$w \leftarrow w - \eta (\alpha \frac{\partial R(w)}{\partial w}+ \frac{\partial Loss}{\partial w})$
+
 where 
  $\eta$ is the learning rate which controls the step size in the parameter space search. 
 Loss  is the loss function used for the network.
